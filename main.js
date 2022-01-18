@@ -1,12 +1,12 @@
-// load the http module
-var http = require('http');
-
-// configure our HTTP server
-var server = http.createServer(function (request, response) {
-  response.writeHead(200, {"Content-Type": "text/plain"});
-  response.end("Hello NodeApp!! \n");
-});
-
-// listen on localhost:8000
-server.listen(8000);
-console.log("Server listening on port 8000 :  http://127.0.0.1:8000/");
+var express = require('express')    //Load express module with `require` directive
+var app = express() 
+ 
+//Define request response in root URL (/)
+app.get('/', function (req, res) {
+  res.send('Hello World')
+})
+ 
+ 
+app.listen(8081, function () {
+  console.log('app listening on port 8081!')
+})
