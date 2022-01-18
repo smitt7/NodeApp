@@ -1,13 +1,9 @@
 # use a node base image
-FROM node:7-onbuild
-
-# set maintainer
-LABEL maintainer "crudsinfotechng@gmail.com"
-
-# set a health check
-HEALTHCHECK --interval=5s \
-            --timeout=5s \
-            CMD curl -f http://127.0.0.1:8000 || exit 1
-
-# tell docker what port to expose
-EXPOSE 8000
+FROM node:7
+RUN mkdir -p /app
+WORKDIR /app             # Sets the working directory in the container
+COPY package.json /app   # copy the dependencies file to the working directory
+RUN npm install          # Install dependencies
+COPY . /app       # Copy the content of the local src directory to the working directory
+EXPOSE 4200
+CMD ["npm", "run", "start"]
